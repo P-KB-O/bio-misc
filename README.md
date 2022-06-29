@@ -1,5 +1,6 @@
 # bio-misc
-dataset prepare/download/preprocess
+
+some misc about biomedical. e.g. dataset prepare/download/preprocess
 
 for a domain you are not familiar. here is my opinion that you should do 
 
