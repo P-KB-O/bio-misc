@@ -41,11 +41,13 @@ db = 'db=pubmed'
 
 # esearch specific settings
 search_eutil = 'esearch.fcgi?'
-search_term = '&term=' + query
+# search_term = '&term=' + query
+search_date = '&mindate=1800/01/01&maxdate=2021/12/31'
 search_usehistory = '&usehistory=y'
 search_rettype = '&retmode=json'
 
-search_url = base_url+search_eutil+db+search_term+search_usehistory+search_rettype
+# search_url = base_url+search_eutil+db+search_term+search_usehistory+search_rettype
+search_url = base_url+search_eutil+db+search_date+search_usehistory+search_rettype
 print('{}\n esearch stage: \n\turl:{}'.format('-'*200, search_url))
 
 ret = requests.get(search_url)
