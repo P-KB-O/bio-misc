@@ -107,5 +107,3 @@ while retstart < int(total_abstract_count):
             if len(split_abstract) > 5:  #
                 writer.writerow(split_abstract)
 
-
-
