@@ -4,7 +4,8 @@ import csv
 import threading 
 from time import sleep 
 from collections import defaultdict 
- 
+
+# import eventlet
 import requests 
 from bs4 import BeautifulSoup 
  
@@ -62,8 +63,17 @@ def get_abstract(retstarts, thd, retmax=60):
         fetch_retmax = "&retmax=" + str(retmax) 
         fetch_url = base_url + fetch_eutil + db + fetch_querykey + fetch_webenv + fetch_retstart + fetch_retmax + fetch_retmode + fetch_rettype 
  
-        ret = requests.get(fetch_url) 
-        fetch_data = ret.content.decode('utf-8') 
+        fetch_data = None
+        # eventlet is not working for MacOS
+        # with eventlet.Timeout(20, False):  # in case request outtime
+        try:
+            ret = requests.get(fetch_url)
+            fetch_data = ret.content.decode('utf-8')
+        except requests.exceptions.Timeout:
+            pass
+
+        if fetch_data is None:
+            continue
  
         soup = BeautifulSoup(fetch_data, 'xml') 
         with open(_file_path, "a", newline='') as fw: 
